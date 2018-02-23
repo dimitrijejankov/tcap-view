@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+
+    <title>TCAP Viewer</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery_1.7.js"></script>
+    <script type="text/javascript" src="js/vis.js"></script>
+
+    <script src="js/json2table.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/simple-table-styling.css" type="text/css" media="all" charset="utf-8">
+    <link href="js/vis-network.min.css" rel="stylesheet" type="text/css" />
+
+
+    <style type="text/css">
+        #mynetwork {
+            width: 900px;
+            height: 912px;
+            border: 1px solid lightgray;
+        }
+    </style>
+
+    <script src="js/tcap-parser.js"></script>
+    <script src="js/tcap-viewer.js"></script>
+
+</head>
+<body>
+<table>
+    <tr>
+        <td rowspan="3">
+            <div id="mynetwork"></div>
+        </td>
+        <td>
+            <textarea css="display:block" id="tcapStringArea" rows="38" cols="50"></textarea>
+        </td>
+    </tr>
+        
+    <tr style="position:relative;height:100%; margin-top:0; padding-top:0;">
+        <td style="position:relative;height:100%; margin-top:0; padding-top:0;"><button  class="button" id="showGraph">Show Graph</button></td>
+    </tr>
+
+    <tr>
+        <td><table id="info-table"></table></td>
+    </tr>
+</table>
+
+<script>
+
+$(document).ready(function(){
+    $("#showGraph").live("click", function(){
+        showGraphForTCAP($("#tcapStringArea").val());
+    });
+});
+
+</script>
+
+</body>
+</html>
