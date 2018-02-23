@@ -35,7 +35,28 @@
             <div id="mynetwork"></div>
         </td>
         <td>
-            <textarea css="display:block" id="tcapStringArea" rows="38" cols="50"></textarea>
+            <textarea css="display:block" id="tcapStringArea" rows="38" cols="50">
+                inputDataForScanUserSet_0(in0) <= SCAN ('chris_set', 'chris_db', 'ScanUserSet_0')
+
+/* Apply selection filtering */
+nativ_0OutForSelectionComp1(in0,nativ_0_1OutFor) <= APPLY (inputDataForScanUserSet_0(in0), inputDataForScanUserSet_0(in0), 'SelectionComp_1', 'native_lambda_0')
+filteredInputForSelectionComp1(in0) <= FILTER (nativ_0OutForSelectionComp1(nativ_0_1OutFor), nativ_0OutForSelectionComp1(in0), 'SelectionComp_1')
+
+/* Apply selection projection */
+nativ_1OutForSelectionComp1 (nativ_1_1OutFor) <= APPLY (filteredInputForSelectionComp1(in0), filteredInputForSelectionComp1(), 'SelectionComp_1', 'native_lambda_1')
+nativ_1OutForSelectionComp1_out( ) <= OUTPUT ( nativ_1OutForSelectionComp1 ( nativ_1_1OutFor ), 'output_set1', 'chris_db', 'WriteUserSet_2')
+
+TCAP OUTPUT:
+inputDataForScanUserSet_0(in0) <= SCAN ('chris_set', 'chris_db', 'ScanUserSet_0')
+
+/* Apply selection filtering */
+nativ_0OutForSelectionComp1(in0,nativ_0_1OutFor) <= APPLY (inputDataForScanUserSet_0(in0), inputDataForScanUserSet_0(in0), 'SelectionComp_1', 'native_lambda_0')
+filteredInputForSelectionComp1(in0) <= FILTER (nativ_0OutForSelectionComp1(nativ_0_1OutFor), nativ_0OutForSelectionComp1(in0), 'SelectionComp_1')
+
+/* Apply selection projection */
+nativ_1OutForSelectionComp1 (nativ_1_1OutFor) <= APPLY (filteredInputForSelectionComp1(in0), filteredInputForSelectionComp1(), 'SelectionComp_1', 'native_lambda_1')
+nativ_1OutForSelectionComp1_out( ) <= OUTPUT ( nativ_1OutForSelectionComp1 ( nativ_1_1OutFor ), 'output_set1', 'chris_db', 'WriteUserSet_2')
+            </textarea>
         </td>
     </tr>
         
