@@ -72,12 +72,12 @@
   }
 */
 var tcapParser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,22],$V2=[7,10],$V3=[10,12];
-var parser = {trace: function trace() { },
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,5],$V1=[1,23],$V2=[7,10],$V3=[10,13],$V4=[1,78],$V5=[10,26];
+var parser = {trace: function trace () { },
 yy: {},
-symbols_: {"error":2,"LogicalQueryPlan":3,"AtomicComputationList":4,"AtomicComputation":5,"TupleSpec":6,"GETS":7,"APPLY":8,"LPHAR":9,"COMMA":10,"STRING":11,"RPHAR":12,"AGG":13,"SCAN":14,"OUTPUT":15,"JOIN":16,"FILTER":17,"HASHLEFT":18,"HASHRIGHT":19,"HASHONE":20,"FLATTEN":21,"IDENTIFIER":22,"AttList":23,"$accept":0,"$end":1},
-terminals_: {2:"error",7:"GETS",8:"APPLY",9:"LPHAR",10:"COMMA",11:"STRING",12:"RPHAR",13:"AGG",14:"SCAN",15:"OUTPUT",16:"JOIN",17:"FILTER",18:"HASHLEFT",19:"HASHRIGHT",20:"HASHONE",21:"FLATTEN",22:"IDENTIFIER"},
-productions_: [0,[3,1],[4,2],[4,1],[5,12],[5,8],[5,10],[5,12],[5,14],[5,10],[5,12],[5,12],[5,10],[5,10],[6,4],[6,3],[23,3],[23,1]],
+symbols_: {"error":2,"LogicalQueryPlan":3,"AtomicComputationList":4,"AtomicComputation":5,"TupleSpec":6,"GETS":7,"APPLY":8,"LPHAR":9,"COMMA":10,"STRING":11,"DictionarySpec":12,"RPHAR":13,"AGG":14,"SCAN":15,"OUTPUT":16,"JOIN":17,"FILTER":18,"HASHLEFT":19,"HASHRIGHT":20,"HASHONE":21,"FLATTEN":22,"IDENTIFIER":23,"AttList":24,"LBRA":25,"RBRA":26,"ListKeyValuePairs":27,"$accept":0,"$end":1},
+terminals_: {2:"error",7:"GETS",8:"APPLY",9:"LPHAR",10:"COMMA",11:"STRING",13:"RPHAR",14:"AGG",15:"SCAN",16:"OUTPUT",17:"JOIN",18:"FILTER",19:"HASHLEFT",20:"HASHRIGHT",21:"HASHONE",22:"FLATTEN",23:"IDENTIFIER",25:"LBRA",26:"RBRA"},
+productions_: [0,[3,1],[4,2],[4,1],[5,14],[5,10],[5,12],[5,14],[5,16],[5,12],[5,14],[5,14],[5,12],[5,12],[5,12],[5,8],[5,10],[5,12],[5,14],[5,10],[5,12],[5,12],[5,10],[5,10],[6,4],[6,3],[24,3],[24,1],[12,2],[12,3],[27,7],[27,5]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -101,79 +101,149 @@ case 3:
 break;
 case 4:
 
-            this.$ = makeApply ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeApply ($$[$0-13], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 5:
 
-            this.$ = makeAgg ($$[$0-7], $$[$0-3], $$[$0-1]);
+            this.$ = makeAgg ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 6:
 
-            this.$ = makeScan ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeScan ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 7:
 
-            this.$ = makeOutput ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeOutput ($$[$0-13], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 8:
 
-            this.$ = makeJoin ($$[$0-13], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeJoin ($$[$0-15], $$[$0-11], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 9:
 
-            this.$ = makeFilter ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeFilter ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 10:
 
-            this.$ = makeHashLeft ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeHashLeft ($$[$0-13], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 11:
 
-            this.$ = makeHashRight ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeHashRight ($$[$0-13], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 12:
 
-            this.$ = makeHashOne ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeHashOne ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 13:
 
-            this.$ = makeFlatten ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+            this.$ = makeFlatten ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 14:
 
-            this.$ = makeTupleSpec ($$[$0-3], $$[$0-1]);
+            this.$ = makeApply ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 15:
 
-            this.$ = makeEmptyTupleSpec ($$[$0-2]);
+            this.$ = makeAgg ($$[$0-7], $$[$0-3], $$[$0-1]);
         
 break;
 case 16:
 
-            this.$ = pushBackAttribute ($$[$0-2], $$[$0]);
+            this.$ = makeScan ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
         
 break;
 case 17:
 
+            this.$ = makeOutput ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 18:
+
+            this.$ = makeJoin ($$[$0-13], $$[$0-9], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 19:
+
+            this.$ = makeFilter ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 20:
+
+            this.$ = makeHashLeft ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 21:
+
+            this.$ = makeHashRight ($$[$0-11], $$[$0-7], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 22:
+
+            this.$ = makeHashOne ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 23:
+
+            this.$ = makeFlatten ($$[$0-9], $$[$0-5], $$[$0-3], $$[$0-1]);
+        
+break;
+case 24:
+
+            this.$ = makeTupleSpec ($$[$0-3], $$[$0-1]);
+        
+break;
+case 25:
+
+            this.$ = makeEmptyTupleSpec ($$[$0-2]);
+        
+break;
+case 26:
+
+            this.$ = pushBackAttribute ($$[$0-2], $$[$0]);
+        
+break;
+case 27:
+
             this.$ = makeAttList ($$[$0]);
+        
+break;
+case 28:
+
+            this.$ = makeEmptyKeyValueList();
+        
+break;
+case 29:
+
+	    this.$ = $$[$0-1];
+        
+break;
+case 30:
+
+	    this.$ = pushBackKeyValue($$[$0-6], $$[$0-3], $$[$0-1]);
+        
+break;
+case 31:
+
+	    this.$ = makeKeyValueList($$[$0-3], $$[$0-1]);
         
 break;
 }
 },
-table: [{3:1,4:2,5:3,6:4,22:$V0},{1:[3]},{1:[2,1],5:6,6:4,22:$V0},o($V1,[2,3]),{7:[1,7]},{9:[1,8]},o($V1,[2,2]),{8:[1,9],13:[1,10],14:[1,11],15:[1,12],16:[1,13],17:[1,14],18:[1,15],19:[1,16],20:[1,17],21:[1,18]},{12:[1,20],22:[1,21],23:19},{9:$V1},{9:[1,23]},{9:[1,24]},{9:[1,25]},{9:[1,26]},{9:[1,27]},{9:[1,28]},{9:[1,29]},{9:[1,30]},{9:[1,31]},{10:[1,33],12:[1,32]},o($V2,[2,15]),o($V3,[2,17]),{6:34,22:$V0},{6:35,22:$V0},{11:[1,36]},{6:37,22:$V0},{6:38,22:$V0},{6:39,22:$V0},{6:40,22:$V0},{6:41,22:$V0},{6:42,22:$V0},{6:43,22:$V0},o($V2,[2,14]),{22:[1,44]},{10:[1,45]},{10:[1,46]},{10:[1,47]},{10:[1,48]},{10:[1,49]},{10:[1,50]},{10:[1,51]},{10:[1,52]},{10:[1,53]},{10:[1,54]},o($V3,[2,16]),{6:55,22:$V0},{11:[1,56]},{11:[1,57]},{11:[1,58]},{6:59,22:$V0},{6:60,22:$V0},{6:61,22:$V0},{6:62,22:$V0},{6:63,22:$V0},{6:64,22:$V0},{10:[1,65]},{12:[1,66]},{10:[1,67]},{10:[1,68]},{10:[1,69]},{10:[1,70]},{10:[1,71]},{10:[1,72]},{10:[1,73]},{10:[1,74]},{11:[1,75]},o($V1,[2,5]),{11:[1,76]},{11:[1,77]},{6:78,22:$V0},{11:[1,79]},{11:[1,80]},{11:[1,81]},{11:[1,82]},{11:[1,83]},{10:[1,84]},{12:[1,85]},{10:[1,86]},{10:[1,87]},{12:[1,88]},{10:[1,89]},{10:[1,90]},{12:[1,91]},{12:[1,92]},{11:[1,93]},o($V1,[2,6]),{11:[1,94]},{6:95,22:$V0},o($V1,[2,9]),{11:[1,96]},{11:[1,97]},o($V1,[2,12]),o($V1,[2,13]),{12:[1,98]},{12:[1,99]},{10:[1,100]},{12:[1,101]},{12:[1,102]},o($V1,[2,4]),o($V1,[2,7]),{11:[1,103]},o($V1,[2,10]),o($V1,[2,11]),{12:[1,104]},o($V1,[2,8])],
-defaultActions: {},
-parseError: function parseError(str, hash) {
+table: [{3:1,4:2,5:3,6:4,23:$V0},{1:[3]},{1:[2,1],5:6,6:4,23:$V0},o($V1,[2,3]),{7:[1,7]},{9:[1,8]},o($V1,[2,2]),{8:[1,9],14:[1,10],15:[1,11],16:[1,12],17:[1,13],18:[1,14],19:[1,15],20:[1,16],21:[1,17],22:[1,18]},{13:[1,20],23:[1,21],24:19},{9:[1,22]},{9:$V1},{9:[1,24]},{9:[1,25]},{9:[1,26]},{9:[1,27]},{9:[1,28]},{9:[1,29]},{9:[1,30]},{9:[1,31]},{10:[1,33],13:[1,32]},o($V2,[2,25]),o($V3,[2,27]),{6:34,23:$V0},{6:35,23:$V0},{11:[1,36]},{6:37,23:$V0},{6:38,23:$V0},{6:39,23:$V0},{6:40,23:$V0},{6:41,23:$V0},{6:42,23:$V0},{6:43,23:$V0},o($V2,[2,24]),{23:[1,44]},{10:[1,45]},{10:[1,46]},{10:[1,47]},{10:[1,48]},{10:[1,49]},{10:[1,50]},{10:[1,51]},{10:[1,52]},{10:[1,53]},{10:[1,54]},o($V3,[2,26]),{6:55,23:$V0},{11:[1,56]},{11:[1,57]},{11:[1,58]},{6:59,23:$V0},{6:60,23:$V0},{6:61,23:$V0},{6:62,23:$V0},{6:63,23:$V0},{6:64,23:$V0},{10:[1,65]},{10:[1,66],13:[1,67]},{10:[1,68]},{10:[1,69]},{10:[1,70]},{10:[1,71]},{10:[1,72]},{10:[1,73]},{10:[1,74]},{10:[1,75]},{11:[1,76]},{12:77,25:$V4},o($V1,[2,15]),{11:[1,79]},{11:[1,80]},{6:81,23:$V0},{11:[1,82]},{11:[1,83]},{11:[1,84]},{11:[1,85]},{11:[1,86]},{10:[1,87]},{13:[1,88]},{9:[1,91],26:[1,89],27:90},{10:[1,92],13:[1,93]},{10:[1,94]},{10:[1,95]},{10:[1,96],13:[1,97]},{10:[1,98]},{10:[1,99]},{10:[1,100],13:[1,101]},{10:[1,102],13:[1,103]},{11:[1,104]},o($V1,[2,5]),{13:[2,28]},{10:[1,106],26:[1,105]},{11:[1,107]},{12:108,25:$V4},o($V1,[2,16]),{11:[1,109]},{6:110,23:$V0},{12:111,25:$V4},o($V1,[2,19]),{11:[1,112]},{11:[1,113]},{12:114,25:$V4},o($V1,[2,22]),{12:115,25:$V4},o($V1,[2,23]),{10:[1,116],13:[1,117]},{13:[2,29]},{9:[1,118]},{10:[1,119]},{13:[1,120]},{10:[1,121],13:[1,122]},{10:[1,123]},{13:[1,124]},{10:[1,125],13:[1,126]},{10:[1,127],13:[1,128]},{13:[1,129]},{13:[1,130]},{12:131,25:$V4},o($V1,[2,14]),{11:[1,132]},{11:[1,133]},o($V1,[2,6]),{12:134,25:$V4},o($V1,[2,17]),{11:[1,135]},o($V1,[2,9]),{12:136,25:$V4},o($V1,[2,20]),{12:137,25:$V4},o($V1,[2,21]),o($V1,[2,12]),o($V1,[2,13]),{13:[1,138]},{10:[1,139]},{13:[1,140]},{13:[1,141]},{10:[1,142],13:[1,143]},{13:[1,144]},{13:[1,145]},o($V1,[2,4]),{11:[1,146]},o($V5,[2,31]),o($V1,[2,7]),{12:147,25:$V4},o($V1,[2,18]),o($V1,[2,10]),o($V1,[2,11]),{13:[1,148]},{13:[1,149]},o($V5,[2,30]),o($V1,[2,8])],
+defaultActions: {89:[2,28],105:[2,29]},
+parseError: function parseError (str, hash) {
     if (hash.recoverable) {
         this.trace(str);
     } else {
@@ -370,40 +440,47 @@ parse: function parse(input) {
         return atomicComputationList;
     };
 
-    var makeAgg = function(output, input, nodeName) {
+    var makeAgg = function(output, input, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : input,
             "computationName" : nodeName,
-            "type" : "HashRight"
+            "type" : "HashRight",
+            "info" : info
         };
     };
 
-    var makeApply = function(output, input, projection, nodeName, opName) {
-        return {
+    var makeApply = function(output, input, projection, nodeName, opName, info) {
+       info = info || [];
+       return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
             "lambdaName" : opName,
-            "type" : "Filter"
+            "type" : "Filter",
+            "info" : info
         };
     };
 
-    var makeScan = function(output, dbName, setName, nodeName) {
-        return {
+    var makeScan = function(output, dbName, setName, nodeName, info) {
+       info = info || [];
+       return {
             "input" : {"setName" : "Empty", "atts" : []},
             "output" : output,
             "projection" : {"setName" : "Empty", "atts" : []},
             "computationName" : nodeName,
             "dbName" : dbName,
             "setName" : setName,
-            "type" : "ScanSet"
+            "type" : "ScanSet",
+            "info" : info
         };
     };
 
-    var makeOutput = function(output, input, dbName, setName, nodeName) {
+    var makeOutput = function(output, input, dbName, setName, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
@@ -411,11 +488,13 @@ parse: function parse(input) {
             "computationName" : nodeName,
             "dbName" : dbName,
             "setName" : setName,
-            "type" : "Output"
+            "type" : "Output",
+            "info" : info
         };
     };
 
-    var makeJoin = function(output, lInput, lProjection, rInput, rProjection, opName) {
+    var makeJoin = function(output, lInput, lProjection, rInput, rProjection, opName, info) {
+        info = info || [];
         return {
             "input" : lInput,
             "output" : output,
@@ -423,59 +502,70 @@ parse: function parse(input) {
             "computationName" : opName,
             "rightInput" : rInput,
             "rightProjection" : rProjection,
-            "type" : "JoinSets"
+            "type" : "JoinSets",
+            "info" : info
         };
     };
 
-    var makeFilter = function(output, input,  projection, nodeName) {
+    var makeFilter = function(output, input,  projection, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
-            "type" : "Filter"
+            "type" : "Filter",
+            "info" : info
         };
     };
 
-    var makeHashLeft = function(output, input, projection, nodeName, opName) {
+    var makeHashLeft = function(output, input, projection, nodeName, opName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
             "lambdaNameIn" : opName,
-            "type" : "HashLeft"
+            "type" : "HashLeft",
+            "info" : info
         }
     };
 
-    var makeHashRight = function(output, input, projection, nodeName, opName) {
+    var makeHashRight = function(output, input, projection, nodeName, opName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
             "lambdaNameIn" : opName,
-            "type" : "HashRight"
+            "type" : "HashRight",
+            "info" : info
         }
     };
 
-    var makeHashOne = function(output, input, projection, nodeName) {
+    var makeHashOne = function(output, input, projection, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
-            "type" : "HashOne"
+            "type" : "HashOne",
+            "info" : info
         };
     };
 
-    var makeFlatten = function(output, input, projection, nodeName) {
+    var makeFlatten = function(output, input, projection, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
-            "type" : "Flatten"
+            "type" : "Flatten",
+            "info" : info
         };
     };
 
@@ -499,6 +589,18 @@ parse: function parse(input) {
 
     var makeAttList = function(fromMe) {
         return [fromMe];
+    };
+
+    var makeEmptyKeyValueList = function() {
+        return {};
+    };
+
+    var makeKeyValueList = function(k, v) {
+        return { k : v };
+    }
+
+    var pushBackKeyValue = function(d, k, v) {
+    	d[k] = v;
     };
 /* generated by jison-lex 0.3.4 */
 var lexer = (function(){
@@ -642,7 +744,7 @@ showPosition:function () {
     },
 
 // test the lexed token: return FALSE when not a match, otherwise return token
-test_match:function (match, indexed_rule) {
+test_match:function(match, indexed_rule) {
         var token,
             lines,
             backup;
@@ -772,7 +874,7 @@ next:function () {
     },
 
 // return next match that has a token
-lex:function lex() {
+lex:function lex () {
         var r = this.next();
         if (r) {
             return r;
@@ -782,12 +884,12 @@ lex:function lex() {
     },
 
 // activates a new lexer condition state (pushes the new lexer condition state onto the condition stack)
-begin:function begin(condition) {
+begin:function begin (condition) {
         this.conditionStack.push(condition);
     },
 
 // pop the previously active lexer condition state off the condition stack
-popState:function popState() {
+popState:function popState () {
         var n = this.conditionStack.length - 1;
         if (n > 0) {
             return this.conditionStack.pop();
@@ -797,7 +899,7 @@ popState:function popState() {
     },
 
 // produce the lexer rule set which is active for the currently active lexer condition state
-_currentRules:function _currentRules() {
+_currentRules:function _currentRules () {
         if (this.conditionStack.length && this.conditionStack[this.conditionStack.length - 1]) {
             return this.conditions[this.conditionStack[this.conditionStack.length - 1]].rules;
         } else {
@@ -806,7 +908,7 @@ _currentRules:function _currentRules() {
     },
 
 // return the currently active lexer condition state; when an index argument is provided it produces the N-th previous condition state, if available
-topState:function topState(n) {
+topState:function topState (n) {
         n = this.conditionStack.length - 1 - Math.abs(n || 0);
         if (n >= 0) {
             return this.conditionStack[n];
@@ -816,7 +918,7 @@ topState:function topState(n) {
     },
 
 // alias for begin(condition)
-pushState:function pushState(condition) {
+pushState:function pushState (condition) {
         this.begin(condition);
     },
 
@@ -838,24 +940,20 @@ case 3:/* skip comment */
 break;
 case 4:return 7
 break;
-case 5:return 12
+case 5:return 13
 break;
 case 6:return 9
 break;
-case 7:return 10
+case 7:return 25
 break;
-case 8:return 7
+case 8:return 26
 break;
-case 9:return 12
+case 9:return 10
 break;
-case 10:return 9
-break;
-case 11:return 10
-break;
-case 12: yy_.yytext = yy_.yytext.toUpperCase();
+case 10: yy_.yytext = yy_.yytext.toUpperCase();
 
                                                       if(yy_.yytext === "FILTER") {
-                                                         return 17;
+                                                         return 18;
                                                       }
 
                                                       if(yy_.yytext === "APPLY") {
@@ -863,49 +961,49 @@ case 12: yy_.yytext = yy_.yytext.toUpperCase();
                                                       }
 
                                                       if(yy_.yytext === "HASHLEFT") {
-                                                         return 18;
-                                                      }
-
-                                                      if(yy_.yytext === "HASHRIGHT") {
                                                          return 19;
                                                       }
 
-                                                      if(yy_.yytext === "HASHONE") {
+                                                      if(yy_.yytext === "HASHRIGHT") {
                                                          return 20;
                                                       }
 
-                                                      if(yy_.yytext === "FLATTEN") {
+                                                      if(yy_.yytext === "HASHONE") {
                                                          return 21;
                                                       }
 
+                                                      if(yy_.yytext === "FLATTEN") {
+                                                         return 22;
+                                                      }
+
                                                       if(yy_.yytext === "SCAN") {
-                                                         return 14;
-                                                      }
-
-                                                      if(yy_.yytext === "AGGREGATE") {
-                                                         return 13;
-                                                      }
-
-                                                      if(yy_.yytext === "JOIN") {
-                                                         return 16;
-                                                      }
-
-                                                      if(yy_.yytext === "OUTPUT") {
                                                          return 15;
                                                       }
 
-                                                      return 22; 
+                                                      if(yy_.yytext === "AGGREGATE") {
+                                                         return 14;
+                                                      }
+
+                                                      if(yy_.yytext === "JOIN") {
+                                                         return 17;
+                                                      }
+
+                                                      if(yy_.yytext === "OUTPUT") {
+                                                         return 16;
+                                                      }
+
+                                                      return 23; 
 break;
-case 13: yy_.yytext = yy_.yytext.toUpperCase().slice(1, -1); return 11; 
+case 11: yy_.yytext = yy_.yytext.toUpperCase().slice(1, -1); return 11; 
 break;
-case 14:/* skip */
+case 12:/* skip */
 break;
-case 15: parsing_error("Unknown token"); 
+case 13: parsing_error("Unknown token"); 
 break;
 }
 },
-rules: [/^(?:\/\*)/,/^(?:\*\/)/,/^(?:.)/,/^(?:\n)/,/^(?:<=)/,/^(?:[)])/,/^(?:[(])/,/^(?:,)/,/^(?:<=)/,/^(?:[)])/,/^(?:[(])/,/^(?:,)/,/^(?:[A-Za-z][A-Za-z0-9_-]*)/,/^(?:"[^\"]*"|'[^\']*')/,/^(?:(\s))/,/^(?:.)/],
-conditions: {"C_COMMENT":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],"inclusive":true},"INITIAL":{"rules":[0,4,5,6,7,8,9,10,11,12,13,14,15],"inclusive":true}}
+rules: [/^(?:\/\*)/,/^(?:\*\/)/,/^(?:.)/,/^(?:\n)/,/^(?:<=)/,/^(?:[)])/,/^(?:[(])/,/^(?:\[)/,/^(?:\])/,/^(?:,)/,/^(?:[A-Za-z][A-Za-z0-9_-]*)/,/^(?:"[^\"]*"|'[^\']*')/,/^(?:(\s))/,/^(?:.)/],
+conditions: {"C_COMMENT":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13],"inclusive":true},"INITIAL":{"rules":[0,4,5,6,7,8,9,10,11,12,13],"inclusive":true}}
 });
 return lexer;
 })();
@@ -922,7 +1020,7 @@ if (typeof require !== 'undefined' && typeof exports !== 'undefined') {
 exports.parser = tcapParser;
 exports.Parser = tcapParser.Parser;
 exports.parse = function () { return tcapParser.parse.apply(tcapParser, arguments); };
-exports.main = function commonjsMain(args) {
+exports.main = function commonjsMain (args) {
     if (!args[1]) {
         console.log('Usage: '+args[0]+' FILE');
         process.exit(1);
