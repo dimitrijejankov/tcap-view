@@ -51,40 +51,47 @@
         return atomicComputationList;
     };
 
-    var makeAgg = function(output, input, nodeName) {
+    var makeAgg = function(output, input, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : input,
             "computationName" : nodeName,
-            "type" : "HashRight"
+            "type" : "HashRight",
+            "info" : info
         };
     };
 
-    var makeApply = function(output, input, projection, nodeName, opName) {
-        return {
+    var makeApply = function(output, input, projection, nodeName, opName, info) {
+       info = info || [];
+       return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
             "lambdaName" : opName,
-            "type" : "Filter"
+            "type" : "Filter",
+            "info" : info
         };
     };
 
-    var makeScan = function(output, dbName, setName, nodeName) {
-        return {
+    var makeScan = function(output, dbName, setName, nodeName, info) {
+       info = info || [];
+       return {
             "input" : {"setName" : "Empty", "atts" : []},
             "output" : output,
             "projection" : {"setName" : "Empty", "atts" : []},
             "computationName" : nodeName,
             "dbName" : dbName,
             "setName" : setName,
-            "type" : "ScanSet"
+            "type" : "ScanSet",
+            "info" : info
         };
     };
 
-    var makeOutput = function(output, input, dbName, setName, nodeName) {
+    var makeOutput = function(output, input, dbName, setName, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
@@ -92,11 +99,13 @@
             "computationName" : nodeName,
             "dbName" : dbName,
             "setName" : setName,
-            "type" : "Output"
+            "type" : "Output",
+            "info" : info
         };
     };
 
-    var makeJoin = function(output, lInput, lProjection, rInput, rProjection, opName) {
+    var makeJoin = function(output, lInput, lProjection, rInput, rProjection, opName, info) {
+        info = info || [];
         return {
             "input" : lInput,
             "output" : output,
@@ -104,59 +113,70 @@
             "computationName" : opName,
             "rightInput" : rInput,
             "rightProjection" : rProjection,
-            "type" : "JoinSets"
+            "type" : "JoinSets",
+            "info" : info
         };
     };
 
-    var makeFilter = function(output, input,  projection, nodeName) {
+    var makeFilter = function(output, input,  projection, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
-            "type" : "Filter"
+            "type" : "Filter",
+            "info" : info
         };
     };
 
-    var makeHashLeft = function(output, input, projection, nodeName, opName) {
+    var makeHashLeft = function(output, input, projection, nodeName, opName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
             "lambdaNameIn" : opName,
-            "type" : "HashLeft"
+            "type" : "HashLeft",
+            "info" : info
         }
     };
 
-    var makeHashRight = function(output, input, projection, nodeName, opName) {
+    var makeHashRight = function(output, input, projection, nodeName, opName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
             "lambdaNameIn" : opName,
-            "type" : "HashRight"
+            "type" : "HashRight",
+            "info" : info
         }
     };
 
-    var makeHashOne = function(output, input, projection, nodeName) {
+    var makeHashOne = function(output, input, projection, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
-            "type" : "HashOne"
+            "type" : "HashOne",
+            "info" : info
         };
     };
 
-    var makeFlatten = function(output, input, projection, nodeName) {
+    var makeFlatten = function(output, input, projection, nodeName, info) {
+        info = info || [];
         return {
             "input" : input,
             "output" : output,
             "projection" : projection,
             "computationName" : nodeName,
-            "type" : "Flatten"
+            "type" : "Flatten",
+            "info" : info
         };
     };
 
@@ -181,6 +201,18 @@
     var makeAttList = function(fromMe) {
         return [fromMe];
     };
+
+    var makeEmptyKeyValueList = function() {
+        return {};
+    };
+
+    var makeKeyValueList = function(k, v) {
+        return { k : v };
+    }
+
+    var pushBackKeyValue = function(d, k, v) {
+    	d[k] = v;
+    };
 %}
 
 /* lexical grammar */
@@ -197,10 +229,8 @@
 "<="                                                return 'GETS'
 [)]                                                 return 'RPHAR'
 [(]                                                 return 'LPHAR'
-","                                                 return 'COMMA'
-"<="                                                return 'GETS'
-[)]                                                 return 'RPHAR'
-[(]                                                 return 'LPHAR'
+"["                                                 return 'LBRA'
+"]"                                                 return 'RBRA'
 ","                                                 return 'COMMA'
 [A-Za-z][A-Za-z0-9_-]*                              { yytext = yytext.toUpperCase();
 
@@ -275,7 +305,47 @@ AtomicComputationList
     ;
 
 AtomicComputation
-    : TupleSpec GETS APPLY LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA STRING RPHAR
+    : TupleSpec GETS APPLY LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeApply ($1, $5, $7, $9, $11, $13);
+        }
+    | TupleSpec GETS AGG LPHAR TupleSpec COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeAgg ($1, $5, $7, $9);
+        }
+    | TupleSpec GETS SCAN LPHAR STRING COMMA STRING COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeScan ($1, $5, $7, $9, $11);
+        }
+    | TupleSpec GETS OUTPUT LPHAR TupleSpec COMMA STRING COMMA STRING COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeOutput ($1, $5, $7, $9, $11, $13);
+        }
+    | TupleSpec GETS JOIN LPHAR TupleSpec COMMA TupleSpec COMMA TupleSpec COMMA TupleSpec COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeJoin ($1, $5, $7, $9, $11, $13, $15);
+        }
+    | TupleSpec GETS FILTER LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeFilter ($1, $5, $7, $9, $11);
+        }
+    | TupleSpec GETS HASHLEFT LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeHashLeft ($1, $5, $7, $9, $11, $13);
+        }
+    | TupleSpec GETS HASHRIGHT LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeHashRight ($1, $5, $7, $9, $11, $13);
+        }
+    | TupleSpec GETS HASHONE LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeHashOne ($1, $5, $7, $9, $11);
+        }
+    | TupleSpec GETS FLATTEN LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA DictionarySpec RPHAR
+        {
+            $$ = makeFlatten ($1, $5, $7, $9, $11);
+        }
+    | TupleSpec GETS APPLY LPHAR TupleSpec COMMA TupleSpec COMMA STRING COMMA STRING RPHAR
         {
             $$ = makeApply ($1, $5, $7, $9, $11);
         }
@@ -336,5 +406,27 @@ AttList
     | IDENTIFIER
         {
             $$ = makeAttList ($1);
+        }
+    ;
+
+DictionarySpec 
+    : LBRA RBRA
+        {
+            $$ = makeEmptyKeyValueList();
+        }
+    | LBRA ListKeyValuePairs RBRA
+        {
+	    $$ = $2;
+        }
+    ;
+
+ListKeyValuePairs 
+    : ListKeyValuePairs COMMA LPHAR STRING COMMA STRING RPHAR 
+        {
+	    $$ = pushBackKeyValue($1, $4, $6);
+        }
+    | LPHAR STRING COMMA STRING RPHAR
+        {
+	    $$ = makeKeyValueList($2, $4);
         }
     ;
